@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/head')  %>
+
+    <body>
+        <!-- Responsive navbar-->
+        <%- include('layouts/navbar')  %>
+
+        <!-- Header-->
+        <header class="bg-dark py-1">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">PLEASE LOG IN</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Form section-->
+        <section class="flex-container bg-light">
+            <div class="container px-5 my-5 px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <% if(errors != null && errors.length  > 0) { %>
+                            <% for(var i=0; i < errors.length; i++) { %>
+                                <div class="alert alert-danger">
+                                    <%= errors[i] %>
+                                </div>
+                            <% } %>
+                        <% } %>
+
+                        <% if (messages && messages.success && messages.success.length > 0) { %>
+                            <% messages.success.forEach(message => { %>
+                                <div class="alert alert-success">
+                                    <%= message %>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                        <form id="contactForm" action="/users/login" method="post" enctype="multipart/form-data">                         
+                            <!-- Email address input-->
+                            <div class="form-floating mb-4">
+                                <input class="form-control" id="login-username" name="username" type="text" placeholder="Username">
+                                <label for="login-username">Username</label>
+                            </div>
+
+                            <!-- Password input-->
+                            <div class="form-floating mb-5">
+                                <input class="form-control" id="login-password" name="password" type="password" placeholder="password"/>
+                                <label for="login-password">Password</label>
+                            </div>
+                            
+                            <div class="d-grid"><button class="btn btn-primary btn-lg" id="loginButton" type="submit">LOG IN</button></div>
+                        </form>
+
+                        
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <%- include('layouts/footer')  %>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/scripts')  %>
+    </body>
+</html>
+

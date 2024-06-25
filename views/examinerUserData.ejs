@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('layouts/head')  %>
+
+<body>
+    <!-- Responsive navbar-->
+    <%- include('layouts/navbar')  %>
+    <!-- Header-->
+    <header class="bg-dark py-1">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Examiner Notes</h1>
+                            <p class="lead text-white-50 mb-4"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </header>
+    <form method="post" id="fApp" action="/examinerList">
+        <!-- Form section-->
+        <input type="hidden" name="idUser" id="idUser" value="<%=idUser%>">
+        <input type="hidden" name="testDate" id="testDate" value="<%=testDate%>">
+        <input type="hidden" name="testType" id="testType" value="<%=testType%>">
+        <section class="bg-light py-5">
+            <div class="container px-5 my-5 px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+
+                        <div>
+                            <p><strong>Filter by Date:</strong>
+                                <%=testDate%>
+                            </p>
+                            <p><strong>Filter by Test Type:</strong>
+                                <%=testType%>
+                            </p>
+
+
+                            <p><strong>Firt Name:</strong>
+                                <%=firstName%>
+                            </p>
+                            <p><strong>Last Name:</strong>
+                                <%=lastName%>
+                            </p>
+                            <p><strong>Age:</strong>
+                                <%=age%>
+                            </p>
+                            <p><strong>Make:</strong>
+                                <%=make%>
+                            </p>
+                            <p><strong>Model:</strong>
+                                <%=model%>
+                            </p>
+                            <p><strong>Year:</strong>
+                                <%=year%>
+                            </p>
+                        </div>
+                        <br>
+
+                        <!-- Examiner's comments and pass/fail option -->
+                        <div class="form-group">
+                            <label for="comments">Comments:</label>
+                            <textarea class="form-control" id="comments" name="comments"
+                                rows="3"><%=comments%></textarea>
+                        </div>
+
+                        <br>
+
+
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <input type="radio" id="passTest" name="passTest" value="Y" <%=(result === true )
+                                    ? 'checked' : '' %>>
+                                <label for="driver2"> Pass = Yes </label>
+                            </li>
+                            <li class="list-group-item">
+                                <input type="radio" id="passTest" name="passTest" value="N" <%=(result === false  )
+                                    ? 'checked' : '' %>>
+                                <label for="driver2"> Pass = No </label>
+                            </li>
+                        </ul>
+
+
+                        <!-- Save button -->
+                        <button type="button" class="btn btn-primary mt-3" name="save" id="save">Save</button>
+                        <button type="button" class="btn btn-primary mt-3" name="back" id="back">Back</button>
+                    </div>
+                </div>
+
+
+
+            </div>
+            </div>
+            </div>
+        </section>
+    </form>
+    <!-- Footer-->
+    <%- include('layouts/footer') %>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/scripts') %>
+            <script>
+                const $ = selector => document.querySelector(selector);
+
+                const save = document.getElementById('save');
+                const back = document.getElementById('back');
+                const formA = document.getElementById('fApp');
+                save.addEventListener('click', function () {
+
+                    formA.action = 'saveComments';
+                    formA.submit();
+                });
+                back.addEventListener('click', function () {
+
+                    formA.action = 'examinerList';
+                    formA.submit();
+                });
+            </script>
+</body>
+
+</html>

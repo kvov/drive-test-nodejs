@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/head')  %>
+
+    <body>
+        <!-- Responsive navbar-->
+        <%- include('layouts/navbar')  %>
+
+        <!-- Header-->
+        <header class="bg-dark py-1">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">PLEASE SIGN UP</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Form section-->
+        <section class="bg-light">
+            <div class="container px-5 my-5 px-5">
+                <div class="row gx-2 justify-content-center">
+                    <div class="col-lg-6">
+
+                        <% if(errors != null && errors.length  > 0) { %>
+                            <% for(var i=0; i < errors.length; i++) { %>
+                                <div class="alert alert-danger">
+                                    <%= errors[i] %>
+                                </div>
+                            <% } %>
+                        <% } %>
+
+                        <% if (messages && messages.success && messages.success.length > 0) { %>
+                            <% messages.success.forEach(message => { %>
+                                <div class="alert alert-success">
+                                    <%= message %>
+                                </div>
+                            <% }) %>
+                        <% } %>
+
+                        <form id="contactForm" action="/users/signup" method="post" enctype="multipart/form-data">                         
+                            <!-- Email address input-->
+                            <div class="form-floating mb-4">
+                                <input class="form-control" id="signup-username" name="username" value= "<%= username %>" type="text" placeholder="Username">
+                                <label for="signup-username">Username</label>
+                            </div>
+
+                            <!-- Password input-->
+                            <div class="form-floating mb-4">
+                                <input class="form-control" id="signup-password" name="password" value= "<%= password %>" type="password" placeholder="Password" />
+                                <label for="signup-password">Password</label>
+                            </div>
+
+                            <!-- Password input repeat-->
+                            <div class="form-floating mb-4">
+                                <input class="form-control" id="password-repeat" name="passwordRepeat" type="password" placeholder="Confirm password" />
+                                <label for="password-repeat">Confirm Password</label>
+                            </div>
+
+                            <!-- User type selection-->
+                            <div class="form-floating mb-5">
+                                <select id="user-type" class="form-control" name="userType" aria-label="User type select">
+                                    <option value="Driver">Driver</option>
+                                    <option value="Examiner">Examiner</option>
+                                    <option value="Admin">Admin</option>
+                                </select>
+                                <label for="user-type">Select User Type</label>
+                            </div>
+                            
+                            <div class="d-grid"><button class="btn btn-primary btn-lg mb-5" id="signup-button" type="submit">Sign Up</button></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <%- include('layouts/footer')  %>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/scripts')  %>
+    </body>
+</html>
+

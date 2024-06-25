@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/head')  %>
+
+    <body>
+        <!-- Responsive navbar-->
+        <%- include('layouts/navbar')  %>
+
+        <!-- Header-->
+        <header class="bg-dark py-1">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Examiner Selection</h1>
+                            <p class="lead text-white-50 mb-4"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <form method="post" id="fApp" action="/examinerList">
+        <!-- Form section-->
+        <section class="bg-light py-5">
+            <div class="container px-5 my-5 px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <% if(errors != null && errors.length  > 0) { %>
+                            <% for(var i=0; i < errors.length; i++) { %>
+                                <div class="alert alert-danger">
+                                    <%= errors[i] %>
+                                </div>
+                            <% } %>
+                        <% } %>
+
+                        <% if (messages && messages.success && messages.success.length > 0) { %>
+                            <% messages.success.forEach(message => { %>
+                                <div class="alert alert-success">
+                                    <%= message %>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                        
+
+
+
+                        <div class="container mt-5">
+
+                            <!-- Date filter -->
+                            <div class="form-group">
+                                <label for="testDate">Filter by Date:</label>
+                                <input type="date" class="form-control" id="testDate" name="testDate" value="<%=testDate%>">
+                            </div>
+    
+                            <br>
+                            <!-- Filter options -->
+                            <div class="form-group">
+                                <label for="testType">Filter by Test Type:</label>
+                                <select class="form-control" id="testType" name="testType">
+                                    <option value="G2" <%= (testType === 'G2') ? 'selected' : '' %>>G2 Test</option>
+                                    <option value="G" <%= (testType === 'G') ? 'selected' : '' %>>G Test</option>
+                                </select>
+                            </div>
+    
+                            <br>
+    
+                            <div class="form-group col-md-4">
+                                <label></label>
+                                <button type="button" class="btn btn-primary btn-block" id="findButton"
+                                    name="findButton">Find</button>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+    <script>
+        const $ = selector => document.querySelector(selector);
+    
+        const findButton = document.getElementById('findButton');
+        const formA = document.getElementById('fApp');
+        findButton.addEventListener('click', function () {
+            formA.action = 'examinerList';
+            formA.submit();
+        });
+    </script>
+        <!-- Footer-->
+        <%- include('layouts/footer')  %>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/scripts')  %>
+    </body>
+</html>
+

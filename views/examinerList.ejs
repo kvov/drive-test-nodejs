@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/head')  %>
+
+    <body>
+        <!-- Responsive navbar-->
+        <%- include('layouts/navbar')  %>
+
+        <!-- Header-->
+        <header class="bg-dark py-1">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Examiner - User Appointments</h1>
+                            <p class="lead text-white-50 mb-4"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <form method="post" id="fApp" action="/examinerUserData">
+            <input type="hidden" name="idApp" id="">
+            <!-- Form section-->
+            <section class="bg-light py-5">
+                <div class="container px-5 my-5 px-5">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-6">
+
+
+                            <!-- Date filter -->
+                            <div class="form-group">
+                                <label for="testDate">Filter by Date:</label>
+                                <input type="text" class="form-control" id="testDate" name="testDate" readonly
+                                    value="<%=testDate%>">
+                            </div>
+
+                            <br>
+                            <!-- Filter options -->
+                            <div class="form-group">
+                                <label for="testType">Filter by Test Type:</label>
+                                <input type="text" class="form-control" readonly id="testType" name="testType"
+                                    value="<%=testType%>">
+                            </div>
+
+                            <br>
+
+                            <% if (appointments.length===0) { %>
+                                <p>There is no data for the filters.</p>
+                                <br>
+                                <button type="button" class="btn btn-primary mt-3" id="selectButton" name="selectButton"
+                                    value="back">Back</button>
+                                <% } else { %>
+                                    <ul class="list-group">
+                                        <% for (let i=0; i < appointments.length; i++) { %>
+                                            <li class="list-group-item">
+                                                <input type="radio" id="driverSelection" name="driverSelection"
+                                                    value="<%=appointments[i]._id%>">
+                                                <label for="driver2">Date: <%=appointments[i].appointmentDate%>
+                                                        - Time: <%=appointments[i].appointmentTime%>
+                                                            - Time slot Available:
+                                                            <%=appointments[i].isTimeSlotAvailable%>
+                                                </label>
+                                            </li>
+                                            <% } %>
+                                    </ul>
+                                    <br>
+                                    <button type="button" class="btn btn-primary mt-3" id="selectButton"
+                                        name="selectButton" value="display">Display</button>
+                                        <button type="button" class="btn btn-primary mt-3" id="selectButton2" name="selectButton2"
+                                    value="back">Back</button>
+                                    <% } %>
+
+
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                </div>
+            </section>
+        </form>
+
+        <script>
+            const $ = selector => document.querySelector(selector);
+
+            const selectButton = document.getElementById('selectButton');
+            const selectButton2 = document.getElementById('selectButton2');
+            const formA = document.getElementById('fApp');
+            const radioButtons  = document.getElementsByName('driverSelection');
+
+            selectButton.addEventListener('click', function () {
+                
+                if (selectButton.value == "back") {
+                    formA.action = 'examiner';
+                } else {
+                    for (var i = 0; i < radioButtons.length; i++) {
+                        if (radioButtons[i].checked) {
+                            formA.idApp.value =  radioButtons[i].value;
+                            break;
+                        }
+                    }
+                    formA.action = 'examinerUserData';
+                }
+
+                formA.submit();
+            });
+
+            selectButton2.addEventListener('click', function () {
+                formA.action = 'examiner';
+                formA.submit();
+            });
+
+
+        </script>
+                <!-- Footer-->
+                <%- include('layouts/footer')  %>
+                <!-- Bootstrap core JS-->
+                <%- include('layouts/scripts')  %>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/head')  %>
+
+    <body>
+        <!-- Responsive navbar-->
+        <%- include('layouts/navbar')  %>
+        
+        <!-- Header-->
+        <header class="bg-dark py-1">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Drivers' Test Results</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="bg-light py-5 border-bottom">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <% if(errors != null && errors.length  > 0) { %>
+                    <% for(var i=0; i < errors.length; i++) { %>
+                        <div class="alert alert-danger">
+                            <%= errors[i] %>
+                        </div>
+                    <% } %>
+                <% } %>
+    
+                <% if(messages != null && messages.length  > 0) { %>
+                    <% for(var i=0; i < messages.length; i++) { %>
+                        <div class="alert alert-success">
+                            <%= messages[i] %>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+            
+
+            <div class="container-fluid mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Test</th>
+                                        <th>Licence no</th>
+                                        <th>Result</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if(driversList) for(var i = 0; i < driversList.length; i++) { %>
+                                    <tr>
+                                        <td><%- driversList[i].firstName %> <%- driversList[i].lastName %></td>
+                                        <td><%- driversList[i].testType %></td>
+                                        <td><%- driversList[i].licenseNo %></td>
+                                        <td class="<%= driversList[i].testResult ? 'text-success' : 'text-danger' %>"><%- driversList[i].testResult ? 'Pass' : 'Fail'%></td>
+                                    </tr>
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer-->
+        <%- include('layouts/footer')  %>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/scripts')  %>
+    </body>
+</html>

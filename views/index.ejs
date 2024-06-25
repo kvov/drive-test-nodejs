@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('layouts/head')  %>
+    <body>
+        <!-- Responsive navbar-->
+        <%- include('layouts/navbar')  %>
+        
+        <!-- Header-->
+        <header class="bg-dark py-1">
+            <div class="container px-5">
+                <div class="row gx-5 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="text-center my-5">
+                            <h1 class="display-5 fw-bolder text-white mb-2">Dashboard</h1>
+                            <p class="lead text-white-50 mb-4">Drive Test Booking Kiosk</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <section class="bg-light py-5 border-bottom">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <% if(errors != null && errors.length  > 0) { %>
+                    <% for(var i=0; i < errors.length; i++) { %>
+                        <div class="alert alert-danger">
+                            <%= errors[i] %>
+                        </div>
+                    <% } %>
+                <% } %>
+    
+                <% if(messages != null && messages.length  > 0) { %>
+                    <% for(var i=0; i < messages.length; i++) { %>
+                        <div class="alert alert-success">
+                            <%= messages[i] %>
+                        </div>
+                    <% } %>
+                <% } %>
+            </div>
+            
+
+            <div class="container px-5 my-5">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bolder">You can book G2/G drive test from this Kiosk</h2>
+                    <p class="lead mb-0">You can book G2/G drive test from this Kiosk</p>
+                    <p class="small text-muted fst-italic">Posted by <span class="fw-bold">DriveTest Center</span></p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer-->
+        <%- include('layouts/footer')  %>
+        <!-- Bootstrap core JS-->
+        <%- include('layouts/scripts')  %>
+    </body>
+</html>
